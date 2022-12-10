@@ -1,10 +1,14 @@
 import { lazy } from 'react';
 
-const SignUp = lazy(() => import('../jsx/pages/Registration'));
-const ForgotPassword = lazy(() => import('../jsx/pages/ForgotPassword'));
+import Dashboard from '../jsx/components/Dashboard';
+import AddHotel from '../jsx/pages/AddHotel';
+import Error404Page from '../jsx/pages/Error/Error404';
+
+const SignUp = lazy(() => import('../jsx/pages/Authentication/Registration'));
+const ForgotPassword = lazy(() => import('../jsx/pages/Authentication/ForgotPassword'));
 const Login = lazy(() => {
     return new Promise(resolve => {
-    setTimeout(() => resolve(import('../jsx/pages/Login')), 500);
+      setTimeout(() => resolve(import('../jsx/pages/Authentication/Login')), 500);
   });
 });
 
@@ -14,5 +18,13 @@ const myRoutes = [
     {path:"/page-forgot-password",component:ForgotPassword},
 ]
 
+const dashboardRoutes = [
+  { path: "/dashboard", component: Dashboard },
 
-export {myRoutes }
+  /// pages
+  { path: "/add-hotel", component: AddHotel },
+  { path: "/page-error-404", component: Error404Page },
+];
+
+
+export { myRoutes, dashboardRoutes }

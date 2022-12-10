@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Error404 = () => {
+const Error404Page = () => {
    return (
       <div className="authincation h-100 p-meddle">
          <div className="container h-100">
@@ -30,4 +30,4 @@ const Error404 = () => {
    );
 };
 
-export default Error404;
+export default Error404Page;

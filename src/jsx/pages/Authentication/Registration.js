@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import {
   loadingToggleAction,
   signupAction,
-} from '../../store/actions/AuthActions';
+} from '../../../store/actions/AuthActions';
 // image
 //import logo from "../../images/logo-full.png";
 
@@ -43,9 +43,9 @@ function Register(props) {
                 <div className="col-xl-12">
                   <div className="auth-form">
                     <div className="text-center mb-3">
-                      {/* <Link to="/login">
-							<img src={logo} alt="" />
-						</Link> */}
+                      <Link to="/login">
+                        Logo
+                      </Link>
                     </div>
                     <h4 className="text-center mb-4 ">Sign up your account</h4>
                     {props.errorMessage && (
@@ -61,7 +61,7 @@ function Register(props) {
                     <form onSubmit={onSignUp}>
                       <div className="form-group mb-3">
                         <label className="mb-0 ">
-                          <p>Full Name</p>
+                          <p className="mb-1">Full Name</p>
                         </label>
                         <input
                           type="text"
@@ -71,7 +71,7 @@ function Register(props) {
                       </div>
                       <div className="form-group mb-3">
                         <label className="mb-0 ">
-                          <p>Hotel/Property</p>
+                          <p className="mb-1">Hotel/Property</p>
                         </label>
                         <input
                           type="text"
@@ -81,7 +81,7 @@ function Register(props) {
                       </div>
                       <div className="form-group mb-3">
                         <label className="mb-0 ">
-                          <p>Email</p>
+                          <p className="mb-1">Email</p>
                         </label>
                         <input
                           value={email}
@@ -91,11 +91,11 @@ function Register(props) {
                         />
                       </div>
                       {errors.email && <div>{errors.email}</div>}
-                   
+
 
                       <div className="form-group mb-3">
                         <label className="mb-0 ">
-                          <p>Create Password</p>
+                          <p className="mb-1">Create Password</p>
                         </label>
                         <input
                           value={password}
@@ -110,7 +110,7 @@ function Register(props) {
 
                       <div className="form-group mb-3">
                         <label className="mb-0 ">
-                          <p>Confirm Password</p>
+                          <p className="mb-1">Confirm Password</p>
                         </label>
                         <input
                           value={password}
@@ -128,7 +128,7 @@ function Register(props) {
                           type="submit"
                           className="btn btn-primary btn-block"
                         >
-                        Confirm
+                          Confirm
                         </button>
                       </div>
                     </form>

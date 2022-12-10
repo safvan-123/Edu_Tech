@@ -11,26 +11,13 @@ import "./step.css";
 /// Layout
 import Nav from "./layouts/nav";
 import Footer from "./layouts/Footer";
-/// Dashboard
-import Home from "./components/Dashboard/Home";
-
-/// Pages
-import Error404 from "./pages/Error404";
 
 import Setting from "./layouts/Setting";
 import { ThemeContext } from "../context/ThemeContext";
+import { dashboardRoutes } from "../routes";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
-  const routes = [
-    /// Dashboard
-    { url: "", component: Home },
-    { url: "blank", component: Home },
-   
-    /// pages
-    
-    { url: "page-error-404", component: Error404 },
-  ];
 
   let path = window?.location?.pathname;
   path = path.split("/");
@@ -54,11 +41,11 @@ const Markup = () => {
             style={{ minHeight: window.screen.height - 60 }}
           >
             <Switch>
-              {routes.map((data, i) => (
+              {dashboardRoutes?.map((data, i) => (
                 <Route
                   key={i}
                   exact
-                  path={`/${data.url}`}
+                  path={data.path}
                   component={data.component}
                 />
               ))}

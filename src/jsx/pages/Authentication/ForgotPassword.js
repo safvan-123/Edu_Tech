@@ -18,7 +18,7 @@ const ForgotPassword = ({ history }) => {
                 <div className="col-xl-12">
                   <div className="auth-form">
                     <div className="text-center mb-3">
-						{/* <Link to="/dashboard">
+                      {/* <Link to="/dashboard">
 							<img src={logo} alt="" />
 						</Link> */}
                     </div>
