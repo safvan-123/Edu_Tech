@@ -2,11 +2,9 @@ import {  Suspense, useEffect } from 'react';
 
 /// Components
 import Index from "./jsx";
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 // action
-import { checkAutoLogin } from './services/AuthService';
-import { isAuthenticated } from './store/selectors/AuthSelectors';
 /// Style
 import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./css/style.css";
@@ -16,7 +14,6 @@ import { myRoutes } from './routes';
 function App(props) {
     const dispatch = useDispatch();
     useEffect(() => {
-        checkAutoLogin(dispatch, props.history);
     }, [dispatch, props.history]);
 
     if (props.isAuthenticated) {
@@ -61,11 +58,5 @@ function App(props) {
     }
 };
 
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: isAuthenticated(state),
-    };
-};
-
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter((App));
 

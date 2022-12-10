@@ -1,16 +1,14 @@
 import React  from 'react';
-import {connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory, withRouter } from 'react-router-dom';
 
-import { logout } from '../../../store/actions/AuthActions';
-import { isAuthenticated } from '../../../store/selectors/AuthSelectors';
 
 function LogoutPage(props){
     const history = useHistory()
     const dispatch = useDispatch();
 
     function onLogout() {
-       dispatch(logout(history));
+    //    dispatch(logout(history));
        // window.location.reload();
     }
     return(
@@ -30,10 +28,5 @@ function LogoutPage(props){
         </>
     )
 } 
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: isAuthenticated(state),
-    };
-};
 
-export default withRouter(connect(mapStateToProps)(LogoutPage));
+export default withRouter((LogoutPage));

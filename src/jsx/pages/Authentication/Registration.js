@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect, useDispatch } from 'react-redux';
-import {
-  loadingToggleAction,
-  signupAction,
-} from '../../../store/actions/AuthActions';
+
 // image
 //import logo from "../../images/logo-full.png";
 
@@ -30,8 +27,7 @@ function Register(props) {
     }
     setErrors(errorObj);
     if (error) return;
-    dispatch(loadingToggleAction(true));
-    dispatch(signupAction(email, password, props.history));
+
   }
   return (
     <div className="authincation h-100 p-meddle ">

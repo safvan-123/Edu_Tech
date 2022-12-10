@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
-import {
-	loadingToggleAction, loginAction,
-} from '../../../store/actions/AuthActions';
+
 
 // image
 //import logo from "../../images/logo-full.png";
 import loginbg from "../../../images/pic1.png";
+import { loginUser } from '../../../store/actions';
 
 function Login(props) {
 	const [email, setEmail] = useState('demo@example.com');
@@ -19,22 +18,26 @@ function Login(props) {
 
 	function onLogin(e) {
 		e.preventDefault();
-		let error = false;
-		const errorObj = { ...errorsObj };
-		if (email === '') {
-			errorObj.email = 'Email is Required';
-			error = true;
+		// let error = false;
+		// const errorObj = { ...errorsObj };
+		// if (email === '') {
+		// 	errorObj.email = 'Email is Required';
+		// 	error = true;
+		// }
+		// if (password === '') {
+		// 	errorObj.password = 'Password is Required';
+		// 	error = true;
+		// }
+		// setErrors(errorObj);
+		// if (error) {
+		// 	return;
+		// }
+		const input = {
+			username: "booking-admin",
+			pass: "bk-admin"
 		}
-		if (password === '') {
-			errorObj.password = 'Password is Required';
-			error = true;
-		}
-		setErrors(errorObj);
-		if (error) {
-			return;
-		}
-		dispatch(loadingToggleAction(true));
-		dispatch(loginAction(email, password, props.history));
+
+		dispatch(loginUser(input))
 	}
 
 	return (
@@ -86,9 +89,9 @@ function Login(props) {
 									<form onSubmit={onLogin} className="form-validate">
 										<h3 className="text-center mb-4 text-black">Sign in your account</h3>
 										<div className="form-group mb-3">
-											<label className="mb-1" htmlFor="val-email"><strong>Email</strong></label>
+											<label className="mb-1" htmlFor="val-email"><strong>username</strong></label>
 											<div>
-												<input type="email" className="form-control"
+												<input type="text" className="form-control"
 													value={email}
 													onChange={(e) => setEmail(e.target.value)}
 													placeholder="Type Your Email Address"
@@ -137,11 +140,5 @@ function Login(props) {
 	);
 };
 
-const mapStateToProps = (state) => {
-	return {
-		errorMessage: state.auth.errorMessage,
-		successMessage: state.auth.successMessage,
-		showLoading: state.auth.showLoading,
-	};
-};
-export default connect(mapStateToProps)(Login);
+
+export default (Login);
