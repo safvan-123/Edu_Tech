@@ -3,7 +3,7 @@ import {  Suspense, useEffect } from 'react';
 /// Components
 import Index from "./jsx";
 import { useDispatch } from 'react-redux';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 // action
 /// Style
 import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
@@ -52,7 +52,14 @@ function App(props) {
                     <Switch>
                         {myRoutes?.map((route, key) => (
                             <Route path={route?.path} component={route?.component} />))}
+
+
+                        {isAuthenticated === false && <Redirect
+                            to={{ pathname: "/login", state: { from: props.location } }}
+                        />}
                     </Switch>
+
+
 
                 </Suspense>
             </div>

@@ -36,6 +36,7 @@ function Register(props) {
     if (hadlePassword.password1 === hadlePassword.password2) {
       sethadlePassword({ ...hadlePassword, error: "" })
     } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hadlePassword.password1, hadlePassword.password2])
 
   return (
