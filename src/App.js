@@ -16,7 +16,9 @@ function App(props) {
     useEffect(() => {
     }, [dispatch, props.history]);
 
-    if (props.isAuthenticated) {
+    const isAuthenticated = localStorage.getItem("access") ? true : false
+
+    if (isAuthenticated) {
         return (
             <>
                 <Suspense fallback={

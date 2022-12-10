@@ -1,6 +1,7 @@
 import React  from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, withRouter } from 'react-router-dom';
+import { logoutUser } from '../../../store/actions';
 
 
 function LogoutPage(props){
@@ -8,8 +9,7 @@ function LogoutPage(props){
     const dispatch = useDispatch();
 
     function onLogout() {
-    //    dispatch(logout(history));
-       // window.location.reload();
+        dispatch(logoutUser(history));
     }
     return(
         <>

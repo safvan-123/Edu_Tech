@@ -4,17 +4,17 @@ export const API_URL = " http://13.233.216.97"
 
 export const axiosApi = axios.create({
     baseURL: API_URL,
-    withCredentials: true,
+    // withCredentials: true,
 })
 
 axiosApi.interceptors.request.use(
     function (config) {
-        const token = localStorage.getItem("token")
+        // const token = localStorage.getItem("token")
 
-        if (token) {
-            config.headers["Authorization"] =
-                "Bearer " + localStorage.getItem("token")
-        }
+        // if (token) {
+        //     config.headers["Authorization"] =
+        //         "Bearer " + localStorage.getItem("token")
+        // }
 
         return config
     },

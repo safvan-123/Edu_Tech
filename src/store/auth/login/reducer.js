@@ -1,65 +1,57 @@
 import {
   LOGIN_USER,
   LOGIN_SUCCESS,
-  LOGOUT_USER,
-  LOGOUT_USER_SUCCESS,
-  API_ERROR,
-  FORGET_PASSWORD,
-  FORGET_PASSWORD_SUCCESS,
-  FORGET_PASSWORD_ERROR,
+  LOGIN_ERROR,
+  REGISTER_ERROR,
+  REGISTER_SUCCESS,
+  REGISTER_USER
 } from "./actionTypes"
 
 const initialState = {
   error: "",
   loading: false,
   user: [],
-  forgetSuccessMsg: "",
-  forgetError: "",
 }
 
 const login = (state = initialState, action) => {
+  // eslint-disable-next-line default-case
   switch (action.type) {
-    case FORGET_PASSWORD:
-      state = {
-        ...state,
-        forgetSuccessMsg: null,
-        forgetError: null,
-      }
-      break
-    case FORGET_PASSWORD_SUCCESS:
-      state = {
-        ...state,
-        forgetSuccessMsg: action.payload,
-      }
-      break
-    case FORGET_PASSWORD_ERROR:
-      state = { ...state, forgetError: action.payload }
-      break
     case LOGIN_USER:
-      state = {
+    case REGISTER_USER:
+      return {
         ...state,
         loading: true,
       }
-      break
     case LOGIN_SUCCESS:
-      state = {
+      return {
         ...state,
         loading: false,
         user: action.payload,
+        error: ""
       }
-      break
-    case LOGOUT_USER:
-      state = { ...state, loading: true, user: [] }
-      break
-    case LOGOUT_USER_SUCCESS:
-      state = { ...state, loading: false }
-      break
-    case API_ERROR:
-      state = { ...state, error: action.payload, loading: false }
-      break
-    default:
-      state = { ...state }
-      break
+
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      }
+
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+        error: ""
+      }
+
+    case REGISTER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+
+      }
   }
   return state
 }

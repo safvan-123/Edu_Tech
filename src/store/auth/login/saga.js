@@ -1,78 +1,77 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 
 // Login Redux States
-import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD } from "./actionTypes"
+import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, } from "./actionTypes"
 import {
-  apiError,
+  loginError,
   loginSuccess,
-  logoutUserSuccess,
-  userForgetPasswordSuccess,
-  userForgetPasswordError,
+  registerUserSuccess,
+  registerUserError
 } from "./actions"
 
 import { post } from "../../../api/index"
 
-function loginApi(user) {
-  return post(`/admin/login`, user)
-}
-function logoutApi(token) {
-  return post(`/auth/logout`, token)
-}
-function forgetUserPassApi(email) {
-  return post("/account/forgot_password/", email)
+function loginApi(loginData) {
+  return post(`/account/v1/login`, loginData)
 }
 
-function* forgetUserPass({ payload }) {
+function registerApi(loginData) {
+  return post(`/account/v1/signup`, loginData)
+}
+
+function logoutApi(token) {
+  // return post(`/auth/logout`, token)
+}
+
+
+function* loginUser({ payload }) {
   try {
-    const response = yield call(forgetUserPassApi, payload)
-    if (response) {
-      yield put(userForgetPasswordSuccess(response?.response))
+    const response = yield call(loginApi, payload.loginData)
+    if (response?.access) {
+      localStorage.setItem("access", response.access)
+      localStorage.setItem("refresh", response.refresh)
+      payload.history.push("/dashboard")
+      yield put(loginSuccess(response))
+    }
+    if (response?.detail) {
+      yield put(loginError(response?.detail))
     }
   } catch (error) {
-    yield put(userForgetPasswordError(error))
+    yield put(loginError(error))
   }
 }
 
-function* loginUser({ payload: { user, history } }) {
+function* registerUser({ payload }) {
   try {
-    const response = yield call(loginApi, user)
-    console.log('====================================');
-    console.log("response", response);
-    console.log('====================================');
-    // if (response?.token) {
-    //   localStorage.setItem("token", response.token)
-    // }
-    // if (response?.error_message) {
-    //   yield put(apiError(response?.error_message))
-    // } else {
-    //   yield put(loginSuccess(response))
-    //   history.push("/dashboard")
-    // }
+    const response = yield call(registerApi, payload.loginData)
+
+    if (response?.id) {
+      payload.history.push("/login")
+      yield put(registerUserSuccess(response))
+    } else {
+      yield put(registerUserError(response))
+    }
   } catch (error) {
-    yield put(apiError(error))
+    yield put(registerUserError(error))
   }
 }
 
 function* logoutUser({ payload: { history } }) {
   try {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("access")
     const response = yield call(logoutApi, token)
-    localStorage.clear("token")
-    if (response?.error_message) {
-      yield put(apiError(response?.error_message))
-    } else {
-      yield put(logoutUserSuccess(response))
-      history.push("/login")
-    }
+    console.log(response);
+    localStorage.clear("access")
+    localStorage.clear("refresh")
+    history.push("/login")
   } catch (error) {
-    yield put(apiError(error))
   }
 }
 
 function* authSaga() {
   yield takeEvery(LOGIN_USER, loginUser)
+  yield takeEvery(REGISTER_USER, registerUser)
   yield takeEvery(LOGOUT_USER, logoutUser)
-  yield takeEvery(FORGET_PASSWORD, forgetUserPass)
 }
 
 export default authSaga

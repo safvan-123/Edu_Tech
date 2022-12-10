@@ -3,38 +3,16 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
-  API_ERROR,
-  SOCIAL_LOGIN,
-  FORGET_PASSWORD,
-  FORGET_PASSWORD_SUCCESS,
-  FORGET_PASSWORD_ERROR,
+  LOGIN_ERROR,
+  REGISTER_ERROR,
+  REGISTER_SUCCESS,
+  REGISTER_USER
 } from "./actionTypes"
 
-export const userForgetPassword = email => {
-  return {
-    type: FORGET_PASSWORD,
-    payload: email,
-  }
-}
-
-export const userForgetPasswordSuccess = message => {
-  return {
-    type: FORGET_PASSWORD_SUCCESS,
-    payload: message,
-  }
-}
-
-export const userForgetPasswordError = message => {
-  return {
-    type: FORGET_PASSWORD_ERROR,
-    payload: message,
-  }
-}
-
-export const loginUser = (user, history) => {
+export const loginUser = (loginData, history) => {
   return {
     type: LOGIN_USER,
-    payload: { user, history },
+    payload: { loginData, history },
   }
 }
 
@@ -42,6 +20,13 @@ export const loginSuccess = user => {
   return {
     type: LOGIN_SUCCESS,
     payload: user,
+  }
+}
+
+export const loginError = error => {
+  return {
+    type: LOGIN_ERROR,
+    payload: error,
   }
 }
 
@@ -59,16 +44,24 @@ export const logoutUserSuccess = () => {
   }
 }
 
-export const apiError = error => {
+
+export const registerUser = (loginData, history) => {
   return {
-    type: API_ERROR,
-    payload: error,
+    type: REGISTER_USER,
+    payload: { loginData, history },
   }
 }
 
-export const socialLogin = (data, history, type) => {
+export const registerUserSuccess = user => {
   return {
-    type: SOCIAL_LOGIN,
-    payload: { data, history, type },
+    type: REGISTER_SUCCESS,
+    payload: user,
+  }
+}
+
+export const registerUserError = error => {
+  return {
+    type: REGISTER_ERROR,
+    payload: error,
   }
 }
