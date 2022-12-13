@@ -12,8 +12,8 @@ function Register(props) {
   const dispatch = useDispatch();
   const history = useHistory()
 
-  const { error, loading } = useSelector(state => ({
-    error: state.Login.error,
+  const { registerError, loading } = useSelector(state => ({
+    registerError: state.Login.registerError,
     loading: state.Login.loading,
   }))
 
@@ -54,7 +54,7 @@ function Register(props) {
                       </Link>
                     </div>
                     <h4 className="text-center mb-4 ">Sign up your account</h4>
-                    {error.username && <Alert color="danger">{error.username[0]}</Alert>}
+                    {registerError && registerError?.username && <Alert color="danger">{registerError?.username[0]}</Alert>}
 
                     <AvForm
                       className="form-horizontal form-validate"

@@ -11,6 +11,7 @@ const initialState = {
   error: "",
   loading: false,
   user: [],
+  registerError: {}
 }
 
 const login = (state = initialState, action) => {
@@ -42,13 +43,13 @@ const login = (state = initialState, action) => {
         ...state,
         loading: false,
         user: action.payload,
-        error: ""
+        registerError: ""
       }
 
     case REGISTER_ERROR:
       return {
         ...state,
-        error: action.payload,
+        registerError: action.payload,
         loading: false,
 
       }

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const API_URL = " http://13.233.216.97"
+export const API_URL = "https://api.tranxinfotech.in"
 
 export const axiosApi = axios.create({
     baseURL: API_URL,
