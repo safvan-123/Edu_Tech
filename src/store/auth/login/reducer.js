@@ -5,17 +5,14 @@ import {
   REGISTER_ERROR,
   REGISTER_SUCCESS,
   REGISTER_USER,
-  COUNT,
 } from "./actionTypes"
 
 const initialState = {
   error: "",
   loading: false,
+  isAuthenticated:false,
   user: [],
   registerError: {},
-}
-const inicount={
-  count:0,
 }
 
 const login = (state = initialState, action) => {
@@ -32,7 +29,8 @@ const login = (state = initialState, action) => {
         ...state,
         loading: false,
         user: action.payload,
-        error: ""
+        error: "",
+        isAuthenticated:true,
       }
 
     case LOGIN_ERROR:
@@ -61,15 +59,4 @@ const login = (state = initialState, action) => {
   return state
 }
 
-export const Inc = (state = inicount, action) => {
-  // eslint-disable-next-line default-case
-  switch (action.type) {
-    case COUNT:
-      return {
-        ...state,
-        count:state.count+1
-      }
-  }
-  return state
-}
 export default login

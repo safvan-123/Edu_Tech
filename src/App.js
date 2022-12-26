@@ -2,21 +2,24 @@ import {  Suspense, useEffect } from 'react';
 
 /// Components
 import Index from "./jsx";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 // action
 /// Style
 import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./css/style.css";
-import { myRoutes } from './routes';
+import { dashboardRoutes, myRoutes } from './routes';
 
 
 function App(props) {
+    const {isAuthenticated} = useSelector(state => ({
+		isAuthenticated: state.Login.isAuthenticated,
+	}))
     const dispatch = useDispatch();
     useEffect(() => {
     }, [dispatch, props.history]);
 
-    const isAuthenticated = localStorage.getItem("access") ? true : false
+    // const isAuthenticated = localStorage.getItem("access") ? true : false
 
     if (isAuthenticated) {
         return (
@@ -52,15 +55,16 @@ function App(props) {
                     <Switch>
                         {myRoutes?.map((route, key) => (
                             <Route path={route?.path} component={route?.component} />))}
-
+    {dashboardRoutes?.map((route, key) => (
+                            <Route path={route?.path} component={route?.component} />))}
 
                         {isAuthenticated === false && <Redirect
                             to={{ pathname: "/login", state: { from: props.location } }}
                         />}
 
-                        <Redirect
-                            to={{ pathname: "/login", state: { from: props.location } }}
-                        />
+{isAuthenticated === true &&  <Redirect
+                            to={{ pathname: "/dashboard", state: { from: props.location } }}
+                        />}
                     </Switch>
 
 

@@ -10,12 +10,6 @@ import {
   COUNT,
 } from "./actionTypes"
 
-export const Increment = (count) => {
-  return {
-    type: COUNT,
-    payload: count+1,
-  }
-}
 
 export const loginUser = (loginData, history) => {
   return {
