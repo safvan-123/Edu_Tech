@@ -61,7 +61,7 @@ const SideBar = () => {
     },
     {
       title: "Settings", icon: "flaticon-025-dashboard", isChild: false, pathname: "/settings",
-    },
+    }
   ]
 
   return (

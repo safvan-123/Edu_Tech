@@ -6,8 +6,16 @@ import {
   LOGIN_ERROR,
   REGISTER_ERROR,
   REGISTER_SUCCESS,
-  REGISTER_USER
+  REGISTER_USER,
+  COUNT,
 } from "./actionTypes"
+
+export const Increment = (count) => {
+  return {
+    type: COUNT,
+    payload: count+1,
+  }
+}
 
 export const loginUser = (loginData, history) => {
   return {
@@ -63,5 +71,11 @@ export const registerUserError = error => {
   return {
     type: REGISTER_ERROR,
     payload: error,
+  }
+}
+export const countIncrement = count => {
+  return {
+    type: COUNT,
+    payload: count+1 ,
   }
 }
