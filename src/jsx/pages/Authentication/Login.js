@@ -18,8 +18,7 @@ function Login() {
   const history=useHistory();
   const onFinish = (values) => {
     console.log("Success:", values);
-    dispatch(loginSuccess());
-    
+    // dispatch(loginSuccess());
   };
   console.log(isAuthenticated);
   const onFinishFailed = (errorInfo) => {
